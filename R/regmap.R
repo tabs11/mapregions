@@ -1,7 +1,7 @@
 #' @title Maps visualization
 #'
 #' @description Plot any territory given Geojson file containing coordinates.
-#' @name regmap
+#' @name mapregions
 #' @docType data
 #' @usage map(geofile, territory, measure, ...)
 #' @param geofile geoJson file to read.
