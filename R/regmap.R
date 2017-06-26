@@ -1,7 +1,7 @@
 #' @title Maps visualization
 #'
 #' @description Plot any territory given Geojson file containing coordinates.
-#' @name PortMap
+#' @name regmap
 #' @docType data
 #' @usage map(geofile, territory, measure, ...)
 #' @param geofile geoJson file to read.
@@ -15,7 +15,7 @@
 #' @return plot
 #' @export
 NULL
-map<-function(
+regmap<-function(
   geofile,
   territory,
   measure,
