@@ -15,6 +15,9 @@
 #' @return plot
 #' @export
 NULL
+regnames<-function(dataset,datacol,file,filecol){
+  dataset[which(!toupper(dataset[,datacol])%in%file@data[,filecol]),]
+}
 regmap<-function(
   geofile,
   territory,
