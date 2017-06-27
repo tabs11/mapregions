@@ -29,7 +29,7 @@ regmap<-function(
     list("sp.text", coordinates(x), cex=0.5,label)
   }
   numb.sp.label <- function(x) {
-    sp.label(x,paste(substr(territory,1,3), max(measure), sep="-"))
+    sp.label(x,paste(substr(territory,1,3), measure, sep="-"))
   }
   make.numb.sp.label <- function(x) {
     do.call("list", numb.sp.label(x))
