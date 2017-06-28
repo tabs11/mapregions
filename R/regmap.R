@@ -15,6 +15,8 @@
 #' @return plot
 #' @export
 NULL
+library(qdap)
+library(rgdal)
 regnames<-function(dataset,datacol,file,filecol){
   dataset[which(!toupper(dataset[,datacol])%in%file@data[,filecol]),]
 }
@@ -32,28 +34,34 @@ matchs<-function(dataset,datacol,file,filecol){
 regmap<-function(
   geofile,
   territory,
+  labels,
   measure,
-  label,
   main,
+  fill,
   mapcol,
   xlimit,
   ylimit
 ){
-  sp.label <- function(x, label) {
-    list("sp.text", coordinates(x), cex=0.5,label)
+  sp.label <- function(geofile, label) {
+    list("sp.text", coordinates(geofile), cex=0.5,label)
   }
-  numb.sp.label <- function(x) {
-    sp.label(x,paste(substr(territory,1,3), measure, sep="-"))
+  numb.sp.label <- function(geofile) {
+    sp.label(geofile,list(
+      abrev=paste(substr(territory,1,3), labels, sep="-"),
+      full=territory,
+      none=rep("",length(territory))
+      )
+    )
   }
-  make.numb.sp.label <- function(x) {
-    do.call("list", numb.sp.label(x))
+  make.numb.sp.label <- function(geofile,fill) {
+    do.call("list", c(numb.sp.label(geofile)[1:3],list(numb.sp.label(geofile)[[4]][[fill]])))
   }
   spplot(
     geofile,
-    zcol=label,
+    zcol=measure,
     main=main,
     col.regions =colorRampPalette(mapcol)(length(territory)+16),
-    sp.layout = make.numb.sp.label(geofile),
+    sp.layout = make.numb.sp.label(geofile,fill),
     scales=list(draw=T),
     col="grey",
     edge.col="grey",
