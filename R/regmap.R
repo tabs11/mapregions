@@ -18,6 +18,17 @@ NULL
 regnames<-function(dataset,datacol,file,filecol){
   dataset[which(!toupper(dataset[,datacol])%in%file@data[,filecol]),]
 }
+#notmatch=as.character(regnames(dataset=exemp,datacol=1,file=file1,filecol=1)[,1])
+
+subst<-function(string,replace,dataset,datacol){
+  mgsub(string,replace, dataset[,datacol])
+}
+#distr=subst(string=notmatch,replace=c("CASTELO BRANCO","VIANA DO CASTELO"),dataset=exemp,datacol=1)
+
+matchs<-function(dataset,datacol,file,filecol){
+  dataset[match(file@data[,filecol],toupper(distr)),datacol]
+}
+#file1@data[,2]=matchs(exemp,2,file1,1)
 regmap<-function(
   geofile,
   territory,
